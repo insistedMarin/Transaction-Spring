@@ -142,7 +142,6 @@ public class AssetServiceTest {
     }
 
     void assertBDEquals(String value, BigDecimal bd) {
-        assertTrue(new BigDecimal(value).compareTo(bd) == 0,
-                String.format("Expected %s but actual %s.", value, bd.toPlainString()));
+        assertEquals(0, new BigDecimal(value).compareTo(bd), String.format("Expected %s but actual %s.", value, bd.toPlainString()));
     }
 }

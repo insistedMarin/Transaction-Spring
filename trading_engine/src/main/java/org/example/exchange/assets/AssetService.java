@@ -19,6 +19,10 @@ public class AssetService extends LoggerSupport {
     // UserId -> Map(AssetEnum -> Assets[available/frozen])
     final ConcurrentMap<Long, ConcurrentMap<AssetEnum, Asset>> userAssets = new ConcurrentHashMap<>();
 
+    /*
+    * Returns the asset of the specified type for the specified user
+    * */
+
     public Asset getAsset(Long userId, AssetEnum assetId) {
         ConcurrentMap<AssetEnum, Asset> assets = userAssets.get(userId);
         if (assets == null) {
@@ -27,6 +31,10 @@ public class AssetService extends LoggerSupport {
         return assets.get(assetId);
     }
 
+
+    /*
+     * Returns all types of assets for the specified user
+     * */
     public Map<AssetEnum, Asset> getAssets(Long userId) {
         Map<AssetEnum, Asset> assets = userAssets.get(userId);
         if (assets == null) {
@@ -85,7 +93,7 @@ public class AssetService extends LoggerSupport {
         }
         return switch (type) {
             case AVAILABLE_TO_AVAILABLE -> {
-                // 需要检查余额且余额不足:
+                // Need to check whether the balance is sufficient:
                 if (checkBalance && fromAsset.available.compareTo(amount) < 0) {
                     yield false;
                 }
@@ -94,7 +102,7 @@ public class AssetService extends LoggerSupport {
                 yield true;
             }
             case AVAILABLE_TO_FROZEN -> {
-                // 需要检查余额且余额不足:
+                // Need to check whether the balance is sufficient:
                 if (checkBalance && fromAsset.available.compareTo(amount) < 0) {
                     yield false;
                 }
@@ -103,7 +111,7 @@ public class AssetService extends LoggerSupport {
                 yield true;
             }
             case FROZEN_TO_AVAILABLE -> {
-                // 需要检查余额且余额不足:
+                // Need to check whether the balance is sufficient:
                 if (checkBalance && fromAsset.frozen.compareTo(amount) < 0) {
                     yield false;
                 }
