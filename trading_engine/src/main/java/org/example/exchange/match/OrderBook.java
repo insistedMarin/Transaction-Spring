@@ -20,7 +20,7 @@ public class OrderBook {
 
     public OrderBook(Direction direction) {
         this.direction = direction;
-        // red-black tree
+        // red-black tree，使用红黑树针对不同的订单簿维持不同的顺序
         this.book = new TreeMap<>(direction == Direction.BUY ? SORT_BUY : SORT_SELL);
     }
 

@@ -16,7 +16,8 @@ import org.example.exchange.support.LoggerSupport;
 @Component
 public class AssetService extends LoggerSupport {
 
-    // UserId -> Map(AssetEnum -> Assets[available/frozen])
+    // UserId -> Map(AssetEnum -> Assets[available/frozen]) 用户资产数据结构，map(用户id->map(资产类型->资产数值类))，
+    // 并发安全。支持多线程操作
     final ConcurrentMap<Long, ConcurrentMap<AssetEnum, Asset>> userAssets = new ConcurrentHashMap<>();
 
     /*

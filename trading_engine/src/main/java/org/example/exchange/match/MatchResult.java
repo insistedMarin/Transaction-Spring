@@ -6,6 +6,10 @@ import java.util.List;
 
 import org.example.exchange.model.trade.OrderEntity;
 
+/*
+* 记录某个TakerOrder匹配的MakerOrder结果，包括潜在成交价格，匹配数量，和Makerorder的实体
+* */
+
 public class MatchResult {
 
     public final OrderEntity takerOrder;

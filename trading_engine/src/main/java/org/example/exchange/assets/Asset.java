@@ -3,6 +3,9 @@ package org.example.exchange.assets;
 import java.math.BigDecimal;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+/*
+* 交易资产数值类类，分为可用资产和冻结资产，记录其具体数值*/
 public class Asset {
     BigDecimal available;
 

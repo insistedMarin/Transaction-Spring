@@ -12,11 +12,13 @@ import org.example.exchange.model.trade.OrderEntity;
 @Component
 public class MatchEngine {
 
+    //两个不同排序的订单簿
     public final OrderBook buyBook = new OrderBook(Direction.BUY);
     public final OrderBook sellBook = new OrderBook(Direction.SELL);
     public BigDecimal marketPrice = BigDecimal.ZERO; // 最新市场价
     private long sequenceId;
 
+    // 根据Order类型决定使用哪个makerBook
     public MatchResult processOrder(long sequenceId, OrderEntity order) {
         return switch (order.direction) {
             case BUY -> processOrder(sequenceId, order, this.sellBook, this.buyBook);
@@ -26,6 +28,7 @@ public class MatchEngine {
     }
 
     /**
+     * Taker不完全交易挂牌，Maker不完全交易更新状态
      * @param takerOrder  输入订单
      * @param makerBook   尝试匹配成交的OrderBook
      * @param anotherBook 未能完全成交后挂单的OrderBook

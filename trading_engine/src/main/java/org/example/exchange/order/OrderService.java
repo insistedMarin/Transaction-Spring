@@ -62,7 +62,7 @@ public class OrderService {
         order.createdAt = order.updatedAt = ts;
         // 添加到ActiveOrders:
         this.activeOrders.put(order.id, order);
-        // 添加到UserOrders:
+        // 添加到UserOrders: 按照用户划分订单，支持快速检索用户订单
         ConcurrentMap<Long, OrderEntity> uOrders = this.userOrders.get(userId);
         if (uOrders == null) {
             uOrders = new ConcurrentHashMap<>();
