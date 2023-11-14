@@ -97,6 +97,8 @@ public class TradingEngineService extends LoggerSupport {
     private Queue<ApiResultMessage> apiResultQueue = new ConcurrentLinkedQueue<>();
     private Queue<NotificationMessage> notificationQueue = new ConcurrentLinkedQueue<>();
 
+    //消费交易消息，生成价格消息
+
     @PostConstruct
     public void init() {
         this.shaUpdateOrderBookLua = this.redisService.loadScriptFromClassPath("/redis/update-orderbook.lua");
@@ -193,6 +195,7 @@ public class TradingEngineService extends LoggerSupport {
         }
     }
 
+    // 异步把订单簿快照存储到redis
     private void runOrderBookThread() {
         logger.info("start update orderbook snapshot to redis...");
         long lastSequenceId = 0;
@@ -221,6 +224,8 @@ public class TradingEngineService extends LoggerSupport {
             }
         }
     }
+
+    //异步入库
 
     private void runDbThread() {
         logger.info("start batch insert to db...");
@@ -365,6 +370,7 @@ public class TradingEngineService extends LoggerSupport {
         int year = zdt.getYear();
         int month = zdt.getMonth().getValue();
         long orderId = event.sequenceId * 10000 + (year * 100 + month);
+        //通过OrderService 创建Order实体
         OrderEntity order = this.orderService.createOrder(event.sequenceId, event.createdAt, orderId, event.userId,
                 event.direction, event.price, event.quantity);
         if (order == null) {
