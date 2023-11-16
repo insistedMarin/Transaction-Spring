@@ -22,7 +22,7 @@ import okhttp3.ResponseBody;
 public class TradingEngineApiProxyService extends LoggerSupport {
 
     //port 8001
-    @Value("#{exchangeConfiguration.apiEndpoints.tradingEngineApi}")
+    @Value("${exchange.config.api-endpoints.trading-engine-api}")
     private String tradingEngineInternalApiEndpoint;
 
     private OkHttpClient okhttpClient = new OkHttpClient.Builder()

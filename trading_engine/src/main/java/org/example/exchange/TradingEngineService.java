@@ -25,7 +25,7 @@ import org.example.exchange.match.MatchEngine;
 import org.example.exchange.message.TickMessage;
 import org.example.exchange.messaging.Messaging;
 import org.example.exchange.messaging.MessagingFactory;
-import org.example.exchange.model.qutation.TickEntity;
+import org.example.exchange.model.quotation.TickEntity;
 import org.example.exchange.model.trade.MatchDetailEntity;
 import org.example.exchange.model.trade.OrderEntity;
 import org.example.exchange.order.OrderService;
@@ -55,9 +55,9 @@ public class TradingEngineService extends LoggerSupport {
     @Autowired(required = false)
     ZoneId zoneId = ZoneId.systemDefault();
 
-    @Value("#{exchangeConfiguration.orderBookDepth}")
+    @Value("${exchange.config.order-book-depth}")
     int orderBookDepth = 100;
-    @Value("#{exchangeConfiguration.debugMode}")
+    @Value("${exchange.config.debug-mode}")
     boolean debugMode = false;
     boolean fatalError = false;
     @Autowired

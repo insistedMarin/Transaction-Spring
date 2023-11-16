@@ -1,7 +1,7 @@
 package org.example.exchange.message;
 
 
-import org.example.exchange.model.qutation.TickEntity;
+import org.example.exchange.model.quotation.TickEntity;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package org.example.exchange.model.qutation;
+package org.example.exchange.model.quotation;
 
 
 import java.math.BigDecimal;

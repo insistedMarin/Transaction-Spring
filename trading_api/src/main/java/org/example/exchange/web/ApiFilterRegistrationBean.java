@@ -40,7 +40,7 @@ public class ApiFilterRegistrationBean extends FilterRegistrationBean<Filter> {
     @Autowired
     ObjectMapper objectMapper;
 
-    @Value("#{exchangeConfiguration.hmacKey}")
+    @Value("${exchange.config.hmac-key}")
     String hmacKey;
 
     @PostConstruct
