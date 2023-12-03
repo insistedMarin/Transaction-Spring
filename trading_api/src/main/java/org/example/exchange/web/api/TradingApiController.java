@@ -256,7 +256,7 @@ public class TradingApiController extends AbstractApiController {
         return deferred;
     }
 
-    // message callback ///////////////////////////////////////////////////////
+    // message callback
 
     public void onApiResultMessage(String msg) {
         logger.info("on subscribed message: {}", msg);
